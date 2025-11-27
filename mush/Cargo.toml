@@ -1,0 +1,11 @@
+[package]
+name = "mush"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.2.7", features = ["derive"] }
+reqwest = { version = "0.11", features = ["blocking", "cookies"] }
+dotenv = "0.15.0"
+anyhow = "1.0.71"
+chrono = { version = "0.4" }

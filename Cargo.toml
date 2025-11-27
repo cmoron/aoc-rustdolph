@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "mush",
+    # Uncomment the line below to include all solution crates in the workspace
+    # "solutions/*/*"
+]
+
+resolver = "2"

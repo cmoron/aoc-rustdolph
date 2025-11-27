@@ -1,0 +1,13 @@
+# --- Rust & Compilation ---
+/target/
+**/*.rs.bk
+.env
+
+# --- AOC inputs ---
+**/input.txt
+
+# --- IDEs and Editors ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
