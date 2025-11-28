@@ -1,4 +1,4 @@
-# 🦌 AOC Rust
+# 🦌 AOC Rustdolph 🦌
 
 Un template Rust pour résoudre les défis d'[Advent of Code](https://adventofcode.com).
 Mush : utilitaire de scaffolding et d'exécution des solutions AOC.
