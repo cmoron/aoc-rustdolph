@@ -1,7 +1,13 @@
 [package]
 name = "mush"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Cyril Moron <cyril.moron@gmail.com>"]
+description = "Outil CLI pour scaffolder et exécuter des solutions Advent of Code"
+repository = "https://github.com/cmoron/aoc-rustdolph"
+license = "MIT"
+keywords = ["advent-of-code", "cli", "scaffolding"]
+categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 clap = { version = "4.2.7", features = ["derive"] }
@@ -9,3 +15,8 @@ reqwest = { version = "0.11", features = ["blocking", "cookies"] }
 dotenv = "0.15.0"
 anyhow = "1.0.71"
 chrono = { version = "0.4" }
+
+[dev-dependencies]
+tempfile = "3.8"
+mockito = "1.2"
+serial_test = "3.0"
