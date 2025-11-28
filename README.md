@@ -45,6 +45,9 @@ cd aoc-rustdolph
 
 # Vérifier que Rust est installé
 cargo --version
+
+# (Recommandé) Installer mush globalement pour l'utiliser partout
+cargo install --path mush
 ```
 
 ## ⚙️ Configuration
@@ -70,10 +73,13 @@ AOC_SESSION=votre_cookie_de_session_ici
 
 ### 1. Initialiser le workspace (optionnel)
 
+> 💡 **Astuce** : Installez d'abord `mush` globalement avec `cargo install --path mush` pour des commandes plus courtes.
+
 Si le projet n'est pas déjà initialisé :
 
 ```bash
-cargo run -p mush -- init
+mush init
+# ou : cargo run -p mush -- init
 ```
 
 Cela crée :
@@ -85,13 +91,16 @@ Cela crée :
 
 ```bash
 # Pour le jour 1 de l'année en cours
-cargo run -p mush -- scaffold -d 1
+mush scaffold -d 1
 
 # Pour une année spécifique
-cargo run -p mush -- scaffold -d 1 -y 2015
+mush scaffold -d 1 -y 2015
 
 # Vous pouvez aussi spécifier n'importe quel jour (1-25)
-cargo run -p mush -- scaffold -d 25 -y 2024
+mush scaffold -d 25 -y 2024
+
+# Sans installation globale :
+# cargo run -p mush -- scaffold -d 1
 ```
 
 Cette commande génère :
@@ -124,10 +133,13 @@ fn part2(input: &str) -> String {
 
 ```bash
 # Mode Debug (compilation rapide, exécution plus lente)
-cargo run -p mush -- run -d 1
+mush run -d 1
 
 # Mode Release (compilation plus lente, exécution ultra-rapide)
-cargo run -p mush -- run -d 1 -r
+mush run -d 1 -r
+
+# Sans installation globale :
+# cargo run -p mush -- run -d 1 -r
 ```
 
 **Sortie typique :**
@@ -200,22 +212,48 @@ aoc-rustdolph/
         └── ...
 ```
 
-## 💡 Raccourcis pratiques
+## 💡 Installation globale (recommandée)
 
-Vous pouvez créer des alias dans votre shell pour simplifier les commandes :
+Pour utiliser `mush` directement sans `cargo run -p`, installez-le globalement :
+
+```bash
+# Depuis la racine du projet
+cargo install --path mush
+
+# Vérifier l'installation
+mush --version
+```
+
+L'exécutable sera installé dans `~/.cargo/bin/` (déjà dans votre PATH si Rust est correctement installé).
+
+### Utilisation après installation
+
+```bash
+# Initialiser un nouveau projet
+mush init
+
+# Créer un scaffold
+mush scaffold -d 5
+mush scaffold -d 1 -y 2023
+
+# Lancer une solution
+mush run -d 5
+mush run -d 5 -r    # Mode release
+```
+
+**Avantages** :
+- ✅ Commandes plus courtes et idiomatiques
+- ✅ Disponible depuis n'importe quel répertoire
+- ✅ Pas besoin d'être dans le workspace
+- ✅ Mises à jour simples : `cargo install --path mush --force`
+
+### Alternative : Alias shell
+
+Si vous préférez ne pas installer globalement, vous pouvez créer des alias :
 
 ```bash
 # Dans ~/.bashrc ou ~/.zshrc
-alias aoc-new='cargo run -p mush -- scaffold -d'
-alias aoc-run='cargo run -p mush -- run -d'
-alias aoc-test='cargo test -p'
-```
-
-Utilisation :
-```bash
-aoc-new 5              # Scaffold du jour 5
-aoc-run 5 -r           # Exécuter le jour 5 en mode release
-aoc-test day05-2024    # Tester le jour 5
+alias mush='cargo run -p mush --'
 ```
 
 ## 🤝 Contribuer
