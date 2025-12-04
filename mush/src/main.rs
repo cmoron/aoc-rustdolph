@@ -129,6 +129,7 @@ resolver = "2"
 .env
 .DS_Store
 **/*.rs.bk
+**/input.txt
 "#;
     create_file(&PathBuf::from(".gitignore"), gitignore_content)?;
 
