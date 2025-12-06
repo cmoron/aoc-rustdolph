@@ -151,16 +151,22 @@ mod tests {
     where
         F: FnOnce(&TempDir) + std::panic::UnwindSafe,
     {
+        // S'assurer qu'on est dans un répertoire valide avant de commencer
+        // En cas d'échec, utiliser /tmp comme fallback
+        let original_dir = env::current_dir().unwrap_or_else(|_| {
+            let fallback = std::path::PathBuf::from("/tmp");
+            let _ = env::set_current_dir(&fallback);
+            fallback
+        });
+
         let temp_dir = setup_temp_dir();
-        let original_dir =
-            env::current_dir().expect("Impossible de récupérer le répertoire actuel");
 
         env::set_current_dir(temp_dir.path())
             .expect("Impossible de changer de répertoire vers le temp_dir");
 
         let result = std::panic::catch_unwind(|| test(&temp_dir));
 
-        // Revenir au répertoire d'origine avant que temp_dir soit drop
+        // Toujours essayer de revenir au répertoire d'origine
         // Ignorer les erreurs si le répertoire n'existe plus
         let _ = env::set_current_dir(&original_dir);
 
