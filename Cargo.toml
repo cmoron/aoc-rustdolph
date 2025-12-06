@@ -6,7 +6,3 @@ members = [
 ]
 
 resolver = "2"
-
-# Patch pour corriger la vulnérabilité idna (RUSTSEC-2024-0421)
-[patch.crates-io]
-idna = "1.0"

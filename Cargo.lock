@@ -888,6 +888,7 @@ dependencies = [
  "chrono",
  "clap",
  "dotenvy",
+ "idna 1.1.0",
  "mockito",
  "reqwest",
  "serial_test",
