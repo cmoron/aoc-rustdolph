@@ -70,7 +70,7 @@ enum Commands {
 }
 
 fn main() -> Result<()> {
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
 
     let cli = Cli::parse();
 
