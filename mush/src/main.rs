@@ -209,12 +209,12 @@ regex = "1.10.3"
     println!("Time: {:.4}ms", start.elapsed().as_secs_f64() * 1000.0);
 }
 
-fn part1(input: &str) -> String {
-    "todo!".to_string()
+fn part1(input: &str) -> usize {
+    0
 }
 
-fn part2(input: &str) -> String {
-    "todo!".to_string()
+fn part2(input: &str) -> usize {
+    0
 }
 
 #[cfg(test)]
@@ -224,7 +224,7 @@ mod tests {
     #[test]
     fn test_part1_example() {
         let example_input = include_str!("../example.txt");
-        assert_eq!(part1(example_input), "todo!");
+        assert_eq!(part1(example_input), 0);
     }
 }
 "#;
