@@ -160,7 +160,9 @@ mod tests {
 
         let result = std::panic::catch_unwind(|| test(&temp_dir));
 
-        env::set_current_dir(original_dir).expect("Impossible de revenir au répertoire d'origine");
+        // Revenir au répertoire d'origine avant que temp_dir soit drop
+        // Ignorer les erreurs si le répertoire n'existe plus
+        let _ = env::set_current_dir(&original_dir);
 
         if let Err(e) = result {
             std::panic::resume_unwind(e);

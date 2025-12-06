@@ -1,0 +1,8 @@
+[package]
+name = "day25-2023"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = "0.10.5"
+regex = "1.10.3"
