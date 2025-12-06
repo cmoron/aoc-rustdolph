@@ -191,7 +191,11 @@ pub fn run_all(year: u16, release: bool, summary_only: bool) -> Result<()> {
 
         // Exécuter le jour
         let mut command = ShellCommand::new("cargo");
-        command.arg("run").arg("-p").arg(&package_name).arg("--quiet");
+        command
+            .arg("run")
+            .arg("-p")
+            .arg(&package_name)
+            .arg("--quiet");
         if release {
             command.arg("--release");
         }
@@ -251,12 +255,12 @@ pub fn run_all(year: u16, release: bool, summary_only: bool) -> Result<()> {
 
     let total_time: f64 = results.iter().map(|r| r.total_time()).sum();
     let avg_time = total_time / results.len() as f64;
-    let fastest = results.iter().min_by(|a, b| {
-        a.total_time().partial_cmp(&b.total_time()).unwrap()
-    });
-    let slowest = results.iter().max_by(|a, b| {
-        a.total_time().partial_cmp(&b.total_time()).unwrap()
-    });
+    let fastest = results
+        .iter()
+        .min_by(|a, b| a.total_time().partial_cmp(&b.total_time()).unwrap());
+    let slowest = results
+        .iter()
+        .max_by(|a, b| a.total_time().partial_cmp(&b.total_time()).unwrap());
 
     let mode = if release { " (mode release)" } else { "" };
     println!("\n📊 Bilan global{}:", mode);
@@ -264,10 +268,18 @@ pub fn run_all(year: u16, release: bool, summary_only: bool) -> Result<()> {
     println!("  Temps total: {:.4}ms", total_time);
     println!("  Temps moyen: {:.4}ms/jour", avg_time);
     if let Some(f) = fastest {
-        println!("  Jour le plus rapide: Day {:02} ({:.4}ms)", f.day, f.total_time());
+        println!(
+            "  Jour le plus rapide: Day {:02} ({:.4}ms)",
+            f.day,
+            f.total_time()
+        );
     }
     if let Some(s) = slowest {
-        println!("  Jour le plus lent: Day {:02} ({:.4}ms)", s.day, s.total_time());
+        println!(
+            "  Jour le plus lent: Day {:02} ({:.4}ms)",
+            s.day,
+            s.total_time()
+        );
     }
 
     Ok(())

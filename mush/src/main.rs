@@ -160,8 +160,7 @@ mod tests {
 
         let result = std::panic::catch_unwind(|| test(&temp_dir));
 
-        env::set_current_dir(original_dir)
-            .expect("Impossible de revenir au répertoire d'origine");
+        env::set_current_dir(original_dir).expect("Impossible de revenir au répertoire d'origine");
 
         if let Err(e) = result {
             std::panic::resume_unwind(e);
@@ -311,8 +310,7 @@ mod tests {
             commands::create_scaffold(day, year).expect("Second scaffold échoué");
 
             // Vérifier que le fichier n'a pas été écrasé
-            let content =
-                fs::read_to_string(&main_path).expect("Impossible de lire main.rs");
+            let content = fs::read_to_string(&main_path).expect("Impossible de lire main.rs");
             assert_eq!(content, custom_content);
 
             env::remove_var("AOC_SESSION");
