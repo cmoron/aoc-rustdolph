@@ -2,9 +2,22 @@
 
 > **Framework Rust pour [Advent of Code](https://adventofcode.com)** - Automatisation du scaffolding, téléchargement des inputs et exécution des solutions.
 
-[![Rust](https://img.shields.io/badge/rust-1.83%2B-orange.svg)](https://www.rust-lang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-11%20passed-brightgreen.svg)](https://github.com/cmoron/aoc-rustdolph)
+<p align="center">
+  <img src="https://img.shields.io/badge/rust-1.83%2B-orange" alt="Rust 1.83+">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License MIT">
+  <a href="https://github.com/cmoron/aoc-rustdolph/actions/workflows/ci.yml">
+    <img src="https://github.com/cmoron/aoc-rustdolph/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+  </a>
+  <a href="https://github.com/cmoron/aoc-rustdolph/actions/workflows/security-audit.yml">
+    <img src="https://github.com/cmoron/aoc-rustdolph/actions/workflows/security-audit.yml/badge.svg" alt="Security Audit">
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=cmoron_aoc-rustdolph">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=cmoron_aoc-rustdolph&metric=alert_status" alt="Quality Gate Status">
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=cmoron_aoc-rustdolph">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=cmoron_aoc-rustdolph&metric=coverage" alt="Coverage">
+  </a>
+</p>
 
 ## 📋 Table des matières
 
