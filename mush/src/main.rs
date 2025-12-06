@@ -355,7 +355,7 @@ fn fetch_input_with_base_url(day: u8, year: u16, base_url: &str) -> Result<Strin
         .text()
         .with_context(|| "Erreur lors de la lecture de la réponse")?;
 
-    Ok(text.trim_end().to_string())
+    Ok(text)
 }
 
 #[cfg(test)]
@@ -548,7 +548,7 @@ mod tests {
         let result = fetch_input_with_base_url(1, 2024, &server.url());
 
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "Test input data");
+        assert_eq!(result.unwrap(), "Test input data\n");
         mock.assert();
 
         env::remove_var("AOC_SESSION");
@@ -580,7 +580,7 @@ mod tests {
 
     #[test]
     #[serial]
-    fn test_fetch_input_trims_whitespace() {
+    fn test_fetch_input_preserves_content() {
         use mockito::Server;
 
         env::set_var("AOC_SESSION", "test_cookie");
@@ -595,8 +595,8 @@ mod tests {
         let result = fetch_input_with_base_url(1, 2024, &server.url());
 
         assert!(result.is_ok());
-        // Vérifier que les espaces de fin sont supprimés
-        assert_eq!(result.unwrap(), "Input with trailing whitespace");
+        // Vérifier que le contenu est préservé tel quel
+        assert_eq!(result.unwrap(), "Input with trailing whitespace   \n\n\n");
         mock.assert();
 
         env::remove_var("AOC_SESSION");
