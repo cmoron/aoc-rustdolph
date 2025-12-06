@@ -11,11 +11,10 @@ categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 clap = { version = "4.2.7", features = ["derive"] }
-reqwest = { version = "0.11", default-features = false, features = ["blocking", "cookies", "rustls-tls"] }
+reqwest = { version = "0.11", default-features = false, features = ["blocking", "rustls-tls"] }
 dotenvy = "0.15"
 anyhow = "1.0.71"
 chrono = { version = "0.4" }
-idna = "1.0"  # Force version 1.0+ pour corriger RUSTSEC-2024-0421
 
 [dev-dependencies]
 tempfile = "3.8"
