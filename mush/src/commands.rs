@@ -178,7 +178,9 @@ mod tests {
 pub fn run_all(year: u16, release: bool, summary_only: bool) -> Result<()> {
     let mut results = Vec::new();
 
-    for day in 1..=25 {
+    let max_day = if year >= 2024 { 12 } else { 25 };
+
+    for day in 1..=max_day {
         let package_name = format!("day{:02}-{}", day, year);
         let day_path = PathBuf::from("solutions")
             .join(year.to_string())
@@ -264,7 +266,7 @@ pub fn run_all(year: u16, release: bool, summary_only: bool) -> Result<()> {
 
     let mode = if release { " (mode release)" } else { "" };
     println!("\n📊 Bilan global{}:", mode);
-    println!("  Jours complétés: {}/25", results.len());
+    println!("  Jours complétés: {}/{}", results.len(), max_day);
     println!("  Temps total: {:.4}ms", total_time);
     println!("  Temps moyen: {:.4}ms/jour", avg_time);
     if let Some(f) = fastest {
