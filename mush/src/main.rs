@@ -176,6 +176,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn test_create_file_success() {
         with_temp_dir(|temp_dir| {
             let file_path = temp_dir.path().join("test_file.txt");
@@ -192,6 +193,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn test_create_file_already_exists() {
         with_temp_dir(|temp_dir| {
             let file_path = temp_dir.path().join("existing_file.txt");
@@ -209,6 +211,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn test_create_file_creates_parent_dirs_not_required() {
         with_temp_dir(|temp_dir| {
             let file_path = temp_dir.path().join("nonexistent_dir").join("test.txt");
