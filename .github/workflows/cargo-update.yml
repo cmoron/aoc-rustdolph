@@ -1,0 +1,40 @@
+name: Cargo Update
+
+on:
+  schedule:
+    # Tous les lundis à 06:00 UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cargo-update:
+    name: Update Cargo.lock
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Run cargo update
+        run: cargo update
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(deps): cargo update hebdomadaire"
+          title: "chore(deps): cargo update hebdomadaire"
+          body: |
+            Mise à jour automatique des dépendances transitives dans `Cargo.lock`.
+
+            Couvre les advisories sur les crates transitives que Dependabot
+            ne sait pas bumper (il ne touche que `Cargo.toml`).
+
+            Le CI vérifie tests + clippy + cargo audit.
+          branch: chore/cargo-update
+          delete-branch: true
+          labels: dependencies
