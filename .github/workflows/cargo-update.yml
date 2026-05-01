@@ -2,8 +2,8 @@ name: Cargo Update
 
 on:
   schedule:
-    # Tous les lundis à 06:00 UTC
-    - cron: '0 6 * * 1'
+    # Tous les jours à 06:00 UTC (cohérent avec l'audit quotidien)
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,17 +24,26 @@ jobs:
         run: cargo update
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: "chore(deps): cargo update hebdomadaire"
-          title: "chore(deps): cargo update hebdomadaire"
+          commit-message: "chore(deps): cargo update automatique"
+          title: "chore(deps): cargo update automatique"
           body: |
             Mise à jour automatique des dépendances transitives dans `Cargo.lock`.
 
             Couvre les advisories sur les crates transitives que Dependabot
             ne sait pas bumper (il ne touche que `Cargo.toml`).
 
-            Le CI vérifie tests + clippy + cargo audit.
+            Auto-merge activé : la PR fusionne d'elle-même si le CI passe
+            (tests + clippy + cargo audit).
           branch: chore/cargo-update
           delete-branch: true
           labels: dependencies
+
+      - name: Enable auto-merge
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --rebase --auto "$PR_NUMBER"
